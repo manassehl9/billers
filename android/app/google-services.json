@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "275435718142",
+    "firebase_url": "https://payment-9efff.firebaseio.com",
+    "project_id": "payment-9efff",
+    "storage_bucket": "payment-9efff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275435718142:android:ae44d056e74ad8c3072caf",
+        "android_client_info": {
+          "package_name": "com.example.payment_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275435718142-6i2uvpk1gpo5u4fe1q37e5qb3lnmugf9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.payment_app",
+            "certificate_hash": "d9a84df6a4a358875b6a8f19547915fa9940c4d2"
+          }
+        },
+        {
+          "client_id": "275435718142-0akq4ecueut690grercufh1vvitaijn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2zxwnf0JhRm6t0K0EW6FI5eKZbmqqgb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275435718142-0akq4ecueut690grercufh1vvitaijn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
