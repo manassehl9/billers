@@ -5,15 +5,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/confirm_pin/confirm_pin.dart';
-import 'package:payment_app/screens/register/pin/pin.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class RegisterPin extends StatefulWidget {
-  State<RegisterPin> createState() => _RegisterPinState();
+class RegisterConfirmPin extends StatefulWidget {
+  State<RegisterConfirmPin> createState() => _RegisterConfirmPinState();
 }
 
-class _RegisterPinState extends State<RegisterPin> {
-  RegisterPinBloc _registerPinBloc;
+class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
+  RegisterConfirmPinBloc _registerConfirmPinBloc;
   var onTapRecognizer;
 
   TextEditingController _pinController = TextEditingController();
@@ -26,7 +25,7 @@ class _RegisterPinState extends State<RegisterPin> {
 
   bool get isPopulated => _pinController.text.isNotEmpty;
 
-  bool isRegisterButtonEnabled(RegisterPinState state) {
+  bool isRegisterButtonEnabled(RegisterConfirmPinState state) {
     return state.isFormValid && isPopulated;
   }
 
@@ -38,15 +37,15 @@ class _RegisterPinState extends State<RegisterPin> {
       };
     errorController = StreamController<ErrorAnimationType>();
     super.initState();
-    _registerPinBloc = BlocProvider.of<RegisterPinBloc>(context);
-    _pinController.addListener(_onPinChanged);
+    _registerConfirmPinBloc = BlocProvider.of<RegisterConfirmPinBloc>(context);
+    _pinController.addListener(_onConfirmPinChanged);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RegisterPinBloc, RegisterPinState>(
+    return BlocListener<RegisterConfirmPinBloc, RegisterConfirmPinState>(
       listener: (context, state) {},
-      child: BlocBuilder<RegisterPinBloc, RegisterPinState>(
+      child: BlocBuilder<RegisterConfirmPinBloc, RegisterConfirmPinState>(
         builder: (context, state) {
           return GestureDetector(
             onTap: () {
@@ -58,25 +57,25 @@ class _RegisterPinState extends State<RegisterPin> {
               child: ListView(
                 children: <Widget>[
                   SizedBox(height: 30),
-                  Container(
-                    height: MediaQuery.of(context).size.height / 3,
-                    child: FlareActor(
-                      "assets/otp.flr",
-                      animation: "otp",
-                      fit: BoxFit.fitHeight,
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                  // Image.asset(
-                  //   'assets/verify.png',
+                  // Container(
                   //   height: MediaQuery.of(context).size.height / 3,
-                  //   fit: BoxFit.fitHeight,
+                  //   child: FlareActor(
+                  //     "assets/otp.flr",
+                  //     animation: "otp",
+                  //     fit: BoxFit.fitHeight,
+                  //     alignment: Alignment.center,
+                  //   ),
                   // ),
+                  Image.asset(
+                    'assets/verify.png',
+                    height: MediaQuery.of(context).size.height / 3,
+                    fit: BoxFit.fitHeight,
+                  ),
                   SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
-                      'Secure your account',
+                      'Pin Confirmation',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                       textAlign: TextAlign.center,
@@ -87,10 +86,10 @@ class _RegisterPinState extends State<RegisterPin> {
                         horizontal: 30.0, vertical: 8),
                     child: RichText(
                       text: TextSpan(
-                          text: "Enter your ",
+                          text: "Enter your pin code ",
                           children: [
                             TextSpan(
-                                text: 'PIN CODE',
+                                text: 'AGAIN',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -173,13 +172,12 @@ class _RegisterPinState extends State<RegisterPin> {
                               hasError = true;
                             });
                           } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    RegisterConfirmPinScreen(),
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => RegisterConfirmPinScreen(),
+                            //   ),
+                            // );
                           }
                         },
                         child: Center(
@@ -227,9 +225,9 @@ class _RegisterPinState extends State<RegisterPin> {
     super.dispose();
   }
 
-  void _onPinChanged() {
-    _registerPinBloc.add(
-      PinChanged(pin: _pinController.text),
+  void _onConfirmPinChanged() {
+    _registerConfirmPinBloc.add(
+      ConfirmPinChanged(pin: _pinController.text),
     );
   }
 }
