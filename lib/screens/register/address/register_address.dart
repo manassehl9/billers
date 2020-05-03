@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/address/bloc/bloc.dart';
 import 'package:payment_app/screens/register/address/register_address_button.dart';
+import 'package:payment_app/screens/register/pin/register_pin_screen.dart';
 
 class RegisterAddress extends StatefulWidget {
   State<RegisterAddress> createState() => _RegisterAddressState();
@@ -133,7 +134,15 @@ class _RegisterAddressState extends State<RegisterAddress> {
                   ),
                   RegisterAddressButton(
                     onPressed: isRegisterButtonEnabled(state)
-                        ? _onFormSubmitted
+                        ? () {
+                            //pass in the details of firstname and last name
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterPinScreen(),
+                              ),
+                            );
+                          }
                         : null,
                   ),
                 ],

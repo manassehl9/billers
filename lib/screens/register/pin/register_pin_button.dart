@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class RegisterAddressButton extends StatelessWidget {
+class RegisterPinButton extends StatelessWidget {
   final VoidCallback _onPressed;
 
-  RegisterAddressButton({Key key, VoidCallback onPressed})
+  RegisterPinButton({Key key, VoidCallback onPressed})
       : _onPressed = onPressed,
         super(key: key);
 

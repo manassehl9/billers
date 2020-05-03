@@ -53,7 +53,7 @@ class Validators {
   }
 
   static isValidPin(String pin) {
-    if (_numberRegExp.hasMatch(pin) && pin.length >= 4) {
+    if (_numberRegExp.hasMatch(pin) && pin.length >= 6) {
       return true;
     }
     return false;
