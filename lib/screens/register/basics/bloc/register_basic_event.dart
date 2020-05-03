@@ -8,45 +8,44 @@ abstract class RegisterBasicEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class BankNameChanged extends RegisterBasicEvent {
-  final String bankName;
+class DateOfBirthChanged extends RegisterBasicEvent {
+  final String dateOfBirth;
 
-  const BankNameChanged({@required this.bankName});
-
-  @override
-  List<Object> get props => [bankName];
+  const DateOfBirthChanged({@required this.dateOfBirth});
 
   @override
-  String toString() => 'BankNameChanged { bankname: $bankName }';
+  List<Object> get props => [dateOfBirth];
+
+  @override
+  String toString() => 'DateOfBirthChanged { dateOfBirth: $dateOfBirth }';
 }
 
-class AccountNameChanged extends RegisterBasicEvent {
-  final String accountName;
+class GenderChanged extends RegisterBasicEvent {
+  final String gender;
 
-  const AccountNameChanged({@required this.accountName});
-
-  @override
-  List<Object> get props => [accountName];
+  const GenderChanged({@required this.gender});
 
   @override
-  String toString() => 'AccountNameChanged { accountname: $accountName }';
+  List<Object> get props => [gender];
+
+  @override
+  String toString() => 'GenderChanged { gender: $gender }';
 }
-
 
 class Submitted extends RegisterBasicEvent {
-  final String bankName;
-  final String accountName;
+  final String dateOfBirth;
+  final String gender;
 
   const Submitted({
-    @required this.bankName,
-    @required this.accountName,
+    @required this.dateOfBirth,
+    @required this.gender,
   });
 
   @override
-  List<Object> get props => [bankName, accountName];
+  List<Object> get props => [dateOfBirth, gender];
 
   @override
   String toString() {
-    return 'Submitted { irstname: $bankName, lastname: $accountName}';
+    return 'Submitted { dateOfBirth: $dateOfBirth, gender: $gender}';
   }
 }

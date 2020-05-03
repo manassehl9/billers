@@ -1,78 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
 import 'package:payment_app/screens/register/basics/bloc/bloc.dart';
 import 'package:payment_app/screens/register/basics/register_basic_button.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class RegisterBasic extends StatefulWidget {
   State<RegisterBasic> createState() => _RegisterBasicState();
 }
 
 class _RegisterBasicState extends State<RegisterBasic> {
-  final TextEditingController _bankNameController = TextEditingController();
-  final TextEditingController _accountNameController = TextEditingController();
+  final TextEditingController _dateofBirthController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  static List<GenderModel> _dropdownItems = new List();
+  GenderModel _dropdownValue;
 
   RegisterBasicBloc _registerBasicBloc;
   String newDate;
   var formatter = new DateFormat('yyyy-MM-dd');
 
   bool get isPopulated =>
-      _bankNameController.text.isNotEmpty &&
-      _accountNameController.text.isNotEmpty;
+      _dateofBirthController.text.isNotEmpty &&
+      _genderController.text.isNotEmpty;
 
   bool isRegisterButtonEnabled(RegisterBasicState state) {
-    return state.isFormValid && isPopulated && !state.isSubmitting;
+    return state.isFormValid && isPopulated;
   }
 
   @override
   void initState() {
     super.initState();
-    _bankNameController.addListener(_onBankNameChanged);
-    _accountNameController.addListener(_onAccountNameChanged);
+    _dropdownItems = [];
+    setState(() {
+      _dropdownItems.add(GenderModel(gender: 'Male'));
+      _dropdownItems.add(GenderModel(gender: 'Female'));
+      _dropdownValue = _dropdownItems[0];
+      _genderController.text = _dropdownValue.gender;
+    });
+    _registerBasicBloc = BlocProvider.of<RegisterBasicBloc>(context);
+    _dateofBirthController.addListener(_onDateOfBirthChanged);
+    _genderController.addListener(_onGenderChanged);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<RegisterBasicBloc, RegisterBasicState>(
-      listener: (context, state) {
-        if (state.isSubmitting) {
-          Scaffold.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Registering...'),
-                    CircularProgressIndicator(),
-                  ],
-                ),
-              ),
-            );
-        }
-        if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
-          Navigator.of(context).pop();
-        }
-        if (state.isFailure) {
-          Scaffold.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Registration Failure'),
-                    Icon(Icons.error),
-                  ],
-                ),
-                backgroundColor: Colors.red,
-              ),
-            );
-        }
-      },
+      listener: (context, state) {},
       child: BlocBuilder<RegisterBasicBloc, RegisterBasicState>(
         builder: (context, state) {
           return Padding(
@@ -118,21 +91,21 @@ class _RegisterBasicState extends State<RegisterBasic> {
                           onChanged: (DateTime date) {
                         newDate = formatter.format(date);
                         setState(() {
-                          _bankNameController.text = newDate;
+                          _dateofBirthController.text = newDate;
                         });
                         print('change $date in time zone ' +
                             date.timeZoneOffset.inHours.toString());
                       }, onConfirm: (date) {
                         newDate = formatter.format(date);
                         setState(() {
-                          _bankNameController.text = newDate;
+                          _dateofBirthController.text = newDate;
                         });
                       }, currentTime: DateTime.now(), locale: LocaleType.en);
                     },
                     child: AbsorbPointer(
                       child: TextFormField(
                         autofocus: true,
-                        controller: _bankNameController,
+                        controller: _dateofBirthController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             fillColor: Color(0xfff3f3f4),
@@ -142,8 +115,8 @@ class _RegisterBasicState extends State<RegisterBasic> {
                         autovalidate: true,
                         autocorrect: false,
                         validator: (_) {
-                          return !state.isAccountNameValid
-                              ? 'Account Name cannot be empty'
+                          return !state.isDateOfBirthValid
+                              ? 'Date of birth cannot be empty'
                               : null;
                         },
                       ),
@@ -153,27 +126,52 @@ class _RegisterBasicState extends State<RegisterBasic> {
                     height: 10,
                   ),
                   Text(
-                    'Account Name',
+                    'Gender',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                    controller: _accountNameController,
+                  InputDecorator(
                     decoration: InputDecoration(
-                        border: InputBorder.none,
-                        fillColor: Color(0xfff3f3f4),
-                        filled: true),
-                    keyboardType: TextInputType.text,
-                    autovalidate: true,
-                    autocorrect: false,
-                    validator: (_) {
-                      return !state.isAccountNameValid
-                          ? 'Account Name cannot be empty'
-                          : null;
-                    },
+                      border: InputBorder.none,
+                      fillColor: Color(0xfff3f3f4),
+                      filled: true,
+                      hintText: 'Choose Gender',
+                    ),
+                    isEmpty: _dropdownValue == null,
+                    child: DropdownButton<GenderModel>(
+                      value: _dropdownValue,
+                      isDense: true,
+                      onChanged: (GenderModel newValue) {
+                        setState(() {
+                          _dropdownValue = newValue;
+                          _genderController.text = _dropdownValue.gender;
+                        });
+                      },
+                      items: _dropdownItems.map((GenderModel value) {
+                        return DropdownMenuItem<GenderModel>(
+                          value: value,
+                          child: Text(value.gender),
+                        );
+                      }).toList(),
+                    ),
                   ),
+                  // TextFormField(
+                  //   controller: _genderController,
+                  //   decoration: InputDecoration(
+                  //       border: InputBorder.none,
+                  //       fillColor: Color(0xfff3f3f4),
+                  //       filled: true),
+                  //   keyboardType: TextInputType.text,
+                  //   autovalidate: true,
+                  //   autocorrect: false,
+                  //   validator: (_) {
+                  //     return !state.isGenderValid
+                  //         ? 'Gender cannot be empty'
+                  //         : null;
+                  //   },
+                  // ),
                   SizedBox(
                     height: 20,
                   ),
@@ -193,30 +191,36 @@ class _RegisterBasicState extends State<RegisterBasic> {
 
   @override
   void dispose() {
-    _bankNameController.dispose();
-    _accountNameController.dispose();
+    _dateofBirthController.dispose();
+    _genderController.dispose();
 
     super.dispose();
   }
 
-  void _onBankNameChanged() {
+  void _onDateOfBirthChanged() {
     _registerBasicBloc.add(
-      BankNameChanged(bankName: _bankNameController.text),
+      DateOfBirthChanged(dateOfBirth: _dateofBirthController.text),
     );
   }
 
-  void _onAccountNameChanged() {
+  void _onGenderChanged() {
     _registerBasicBloc.add(
-      AccountNameChanged(accountName: _accountNameController.text),
+      GenderChanged(gender: _genderController.text),
     );
   }
 
   void _onFormSubmitted() {
     _registerBasicBloc.add(
       Submitted(
-        bankName: _bankNameController.text,
-        accountName: _accountNameController.text,
+        dateOfBirth: _dateofBirthController.text,
+        gender: _genderController.text,
       ),
     );
   }
+}
+
+class GenderModel {
+  String gender;
+
+  GenderModel({this.gender});
 }

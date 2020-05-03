@@ -2,103 +2,70 @@ import 'package:meta/meta.dart';
 
 @immutable
 class RegisterBasicState {
-  final bool isBankNameValid;
-  final bool isAccountNameValid;
-  final bool isSubmitting;
-  final bool isSuccess;
-  final bool isFailure;
+  final bool isDateOfBirthValid;
+  final bool isGenderValid;
 
-  bool get isFormValid => isBankNameValid && isAccountNameValid;
+  bool get isFormValid => isDateOfBirthValid && isGenderValid;
 
   RegisterBasicState({
-    @required this.isBankNameValid,
-    @required this.isAccountNameValid,
-    @required this.isSubmitting,
-    @required this.isSuccess,
-    @required this.isFailure,
+    @required this.isDateOfBirthValid,
+    @required this.isGenderValid,
   });
 
   factory RegisterBasicState.empty() {
     return RegisterBasicState(
-      isBankNameValid: true,
-      isAccountNameValid: true,
-      isSubmitting: false,
-      isSuccess: false,
-      isFailure: false,
+      isDateOfBirthValid: true,
+      isGenderValid: true,
     );
   }
 
   factory RegisterBasicState.loading() {
     return RegisterBasicState(
-      isBankNameValid: true,
-      isAccountNameValid: true,
-      isSubmitting: true,
-      isSuccess: false,
-      isFailure: false,
+      isDateOfBirthValid: true,
+      isGenderValid: true,
     );
   }
 
   factory RegisterBasicState.failure() {
     return RegisterBasicState(
-      isBankNameValid: true,
-      isAccountNameValid: true,
-      isSubmitting: false,
-      isSuccess: false,
-      isFailure: true,
+      isDateOfBirthValid: true,
+      isGenderValid: true,
     );
   }
 
   factory RegisterBasicState.success() {
     return RegisterBasicState(
-      isBankNameValid: true,
-      isAccountNameValid: true,
-      isSubmitting: false,
-      isSuccess: true,
-      isFailure: false,
+      isDateOfBirthValid: true,
+      isGenderValid: true,
     );
   }
 
   RegisterBasicState update({
-    bool isBankNameValid,
-    bool isAccountNameValid,
+    bool isDateOfBirthValid,
+    bool isGenderValid,
   }) {
     return copyWith(
-      isBankNameValid: isBankNameValid,
-      isAccountNameValid: isAccountNameValid,
-      isSubmitting: false,
-      isSuccess: false,
-      isFailure: false,
+      isDateOfBirthValid: isDateOfBirthValid,
+      isGenderValid: isGenderValid,
     );
   }
 
   RegisterBasicState copyWith({
-    bool isBankNameValid,
-    bool isAccountNameValid,
+    bool isDateOfBirthValid,
+    bool isGenderValid,
     bool isSubmitEnabled,
-    bool isSubmitting,
-    bool isSuccess,
-    bool isFailure,
   }) {
     return RegisterBasicState(
-      isBankNameValid: isBankNameValid ?? this.isBankNameValid,
-      isAccountNameValid: isAccountNameValid ?? this.isAccountNameValid,
-      isSubmitting: isSubmitting ?? this.isSubmitting,
-      isSuccess: isSuccess ?? this.isSuccess,
-      isFailure: isFailure ?? this.isFailure,
+      isDateOfBirthValid: isDateOfBirthValid ?? this.isDateOfBirthValid,
+      isGenderValid: isGenderValid ?? this.isGenderValid,
     );
   }
 
   @override
   String toString() {
     return '''RegisterState {
-
-     
-      isBankNameValid: $isBankNameValid,
-      isAccountNameValid: $isAccountNameValid,
-      
-      isSubmitting: $isSubmitting,
-      isSuccess: $isSuccess,
-      isFailure: $isFailure,
+      isDateOfBirthValid: $isDateOfBirthValid,
+      isGenderValid: $isGenderValid,
     }''';
   }
 }

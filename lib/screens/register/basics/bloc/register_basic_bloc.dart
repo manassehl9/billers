@@ -5,7 +5,6 @@ import 'package:payment_app/validators.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RegisterBasicBloc extends Bloc<RegisterBasicEvent, RegisterBasicState> {
-  
   @override
   RegisterBasicState get initialState => RegisterBasicState.empty();
 
@@ -15,14 +14,10 @@ class RegisterBasicBloc extends Bloc<RegisterBasicEvent, RegisterBasicState> {
     TransitionFunction<RegisterBasicEvent, RegisterBasicState> transitionFn,
   ) {
     final nonDebounceStream = events.where((event) {
-      return (
-          event is! BankNameChanged &&
-          event is! AccountNameChanged );
+      return (event is! DateOfBirthChanged && event is! GenderChanged);
     });
     final debounceStream = events.where((event) {
-      return (
-          event is BankNameChanged ||
-          event is AccountNameChanged );
+      return (event is DateOfBirthChanged || event is GenderChanged);
     }).debounceTime(Duration(milliseconds: 300));
     return super.transformEvents(
       nonDebounceStream.mergeWith([debounceStream]),
@@ -34,23 +29,23 @@ class RegisterBasicBloc extends Bloc<RegisterBasicEvent, RegisterBasicState> {
   Stream<RegisterBasicState> mapEventToState(
     RegisterBasicEvent event,
   ) async* {
-   if (event is BankNameChanged) {
-      yield* _mapBankNameChangedToState(event.bankName);
-    } else if (event is AccountNameChanged) {
-      yield* _mapAccountNameChangedToState(event.accountName);
-    }  
+    if (event is DateOfBirthChanged) {
+      yield* _mapDateOfBirthChangedToState(event.dateOfBirth);
+    } else if (event is GenderChanged) {
+      yield* _mapGenderChangedToState(event.gender);
+    }
   }
 
-
-  Stream<RegisterBasicState> _mapBankNameChangedToState(String bankName) async* {
+  Stream<RegisterBasicState> _mapDateOfBirthChangedToState(
+      String dateOfBirth) async* {
     yield state.update(
-      isBankNameValid: Validators.isValidBankName(bankName),
+      isDateOfBirthValid: Validators.isValidDateOfBirth(dateOfBirth),
     );
   }
 
-  Stream<RegisterBasicState> _mapAccountNameChangedToState(String accountName) async* {
+  Stream<RegisterBasicState> _mapGenderChangedToState(String gender) async* {
     yield state.update(
-      isAccountNameValid: Validators.isValidAccountName(accountName),
+      isGenderValid: Validators.isValidGender(gender),
     );
   }
 }

@@ -25,6 +25,17 @@ class Validators {
     return _letterRegExp.hasMatch(lastName);
   }
 
+  static isValidDateOfBirth(String dateOfBirth) {
+    if (dateOfBirth.length >= 1) {
+      return true;
+    }
+    return false;
+  }
+
+  static isValidGender(String gender) {
+    return _letterRegExp.hasMatch(gender);
+  }
+
   static isValidBankName(String bankName) {
     return _letterRegExp.hasMatch(bankName);
   }
