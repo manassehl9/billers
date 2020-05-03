@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:payment_app/screens/register/address/register_address_screen.dart';
 import 'package:payment_app/screens/register/basics/bloc/bloc.dart';
 import 'package:payment_app/screens/register/basics/register_basic_button.dart';
 
@@ -157,27 +158,20 @@ class _RegisterBasicState extends State<RegisterBasic> {
                       }).toList(),
                     ),
                   ),
-                  // TextFormField(
-                  //   controller: _genderController,
-                  //   decoration: InputDecoration(
-                  //       border: InputBorder.none,
-                  //       fillColor: Color(0xfff3f3f4),
-                  //       filled: true),
-                  //   keyboardType: TextInputType.text,
-                  //   autovalidate: true,
-                  //   autocorrect: false,
-                  //   validator: (_) {
-                  //     return !state.isGenderValid
-                  //         ? 'Gender cannot be empty'
-                  //         : null;
-                  //   },
-                  // ),
                   SizedBox(
                     height: 20,
                   ),
                   RegisterBasicButton(
                     onPressed: isRegisterButtonEnabled(state)
-                        ? _onFormSubmitted
+                        ? () {
+                            //pass in the details of firstname and last name
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterAddressScreen(),
+                              ),
+                            );
+                          }
                         : null,
                   ),
                 ],
