@@ -6,9 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/confirm_pin/confirm_pin.dart';
 import 'package:payment_app/screens/register/pin/pin.dart';
+import 'package:payment_app/user_repository.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class RegisterPin extends StatefulWidget {
+  final UserRepository _userRepository;
+
+  RegisterPin({Key key, @required UserRepository userRepository})
+      : assert(userRepository != null),
+        _userRepository = userRepository,
+        super(key: key);
   State<RegisterPin> createState() => _RegisterPinState();
 }
 
@@ -176,8 +183,9 @@ class _RegisterPinState extends State<RegisterPin> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    RegisterConfirmPinScreen(),
+                                builder: (context) => RegisterConfirmPinScreen(
+                                  userRepository: widget._userRepository,
+                                ),
                               ),
                             );
                           }

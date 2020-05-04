@@ -3,8 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/address/bloc/bloc.dart';
 import 'package:payment_app/screens/register/address/register_address_button.dart';
 import 'package:payment_app/screens/register/pin/register_pin_screen.dart';
+import 'package:payment_app/user_repository.dart';
 
 class RegisterAddress extends StatefulWidget {
+  final UserRepository _userRepository;
+
+  RegisterAddress({Key key, @required UserRepository userRepository})
+      : assert(userRepository != null),
+        _userRepository = userRepository,
+        super(key: key);
+  
   State<RegisterAddress> createState() => _RegisterAddressState();
 }
 
@@ -139,7 +147,7 @@ class _RegisterAddressState extends State<RegisterAddress> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => RegisterPinScreen(),
+                                builder: (context) => RegisterPinScreen(userRepository: widget._userRepository,),
                               ),
                             );
                           }

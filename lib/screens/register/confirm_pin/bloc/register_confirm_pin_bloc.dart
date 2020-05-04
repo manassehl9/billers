@@ -6,6 +6,7 @@ import 'package:rxdart/rxdart.dart';
 
 class RegisterConfirmPinBloc
     extends Bloc<RegisterConfirmPinEvent, RegisterConfirmPinState> {
+
   @override
   RegisterConfirmPinState get initialState => RegisterConfirmPinState.empty();
 

@@ -1,13 +1,20 @@
 import 'dart:async';
 
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/confirm_pin/confirm_pin.dart';
+import 'package:payment_app/screens/register/profile/register_profile_screen.dart';
+import 'package:payment_app/user_repository.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class RegisterConfirmPin extends StatefulWidget {
+  final UserRepository _userRepository;
+
+  RegisterConfirmPin({Key key, @required UserRepository userRepository})
+      : assert(userRepository != null),
+        _userRepository = userRepository,
+        super(key: key);
   State<RegisterConfirmPin> createState() => _RegisterConfirmPinState();
 }
 
@@ -172,12 +179,14 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
                               hasError = true;
                             });
                           } else {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => RegisterConfirmPinScreen(),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterProfileScreen(
+                                  userRepository: widget._userRepository,
+                                ),
+                              ),
+                            );
                           }
                         },
                         child: Center(
@@ -221,7 +230,6 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
   @override
   void dispose() {
     _pinController.dispose();
-
     super.dispose();
   }
 

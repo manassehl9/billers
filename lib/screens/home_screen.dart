@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  final String name;
+  // final String name;
 
-  HomeScreen({Key key, @required this.name}) : super(key: key);
+  // HomeScreen({Key key, @required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
@@ -27,7 +26,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Center(child: Text('Welcome $name!')),
+          Center(child: Text('Welcome Hey')),
         ],
       ),
     );
