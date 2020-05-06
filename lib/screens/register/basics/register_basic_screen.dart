@@ -6,8 +6,10 @@ import 'package:payment_app/user_repository.dart';
 
 class RegisterBasicScreen extends StatelessWidget {
   final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
 
-  RegisterBasicScreen({Key key, @required UserRepository userRepository})
+  RegisterBasicScreen({Key key, @required UserRepository userRepository, @required this.firstName, @required this.lastName})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -18,7 +20,11 @@ class RegisterBasicScreen extends StatelessWidget {
       body: Center(
         child: BlocProvider<RegisterBasicBloc>(
           create: (context) => RegisterBasicBloc(),
-          child: RegisterBasic(userRepository: _userRepository,),
+          child: RegisterBasic(
+            userRepository: _userRepository,
+            firstName: firstName,
+            lastName: lastName
+          ),
         ),
       ),
     );

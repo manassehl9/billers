@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
-import 'package:payment_app/screens/home_screen.dart';
+import 'package:payment_app/screens/login/login.dart';
 import 'package:payment_app/screens/register/profile/bloc/bloc.dart';
 import 'package:payment_app/screens/register/profile/register_profile_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:payment_app/user_repository.dart';
 
 class RegisterProfile extends StatefulWidget {
-  
   State<RegisterProfile> createState() => _RegisterProfileState();
 }
 
@@ -33,11 +34,6 @@ class _RegisterProfileState extends State<RegisterProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final PageRouteBuilder _homeRoute = new PageRouteBuilder(
-      pageBuilder: (BuildContext context, _, __) {
-        return HomeScreen();
-      },
-    );
     return BlocListener<RegisterProfileBloc, RegisterProfileState>(
       listener: (context, state) {
         if (state.isSubmitting) {
@@ -57,9 +53,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
         }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
-              //Use Pref to get data here
-          Navigator.pushAndRemoveUntil(
-              context, _homeRoute, (Route<dynamic> r) => false);
+          Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
         }
         if (state.isFailure) {
           Scaffold.of(context)
@@ -133,7 +127,16 @@ class _RegisterProfileState extends State<RegisterProfile> {
                   ),
                   RegisterProfileButton(
                     onPressed: isRegisterButtonEnabled(state)
-                        ? _onFormSubmitted
+                        ? () async {
+                            _onFormSubmitted();
+
+                            await Firestore.instance
+                                .collection('registered_data')
+                                .document()
+                                .setData({})
+                                .then((result) => print('here'))
+                                .catchError((err) => print(err));
+                          }
                         : null,
                   ),
                 ],
@@ -154,19 +157,19 @@ class _RegisterProfileState extends State<RegisterProfile> {
 
   void _onEmailChanged() {
     _registerProfileBloc.add(
-      EmailChanged(email: _emailController.text),
+      ProfileEmailChanged(email: _emailController.text),
     );
   }
 
   void _onPasswordChanged() {
     _registerProfileBloc.add(
-      PasswordChanged(password: _passwordController.text),
+      ProfilePasswordChanged(password: _passwordController.text),
     );
   }
 
   void _onFormSubmitted() {
     _registerProfileBloc.add(
-      Submitted(
+      ProfileSubmitted(
         email: _emailController.text,
         password: _passwordController.text,
       ),

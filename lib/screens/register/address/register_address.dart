@@ -7,12 +7,22 @@ import 'package:payment_app/user_repository.dart';
 
 class RegisterAddress extends StatefulWidget {
   final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
+  final String dateOfBirth;
+  final String gender;
 
-  RegisterAddress({Key key, @required UserRepository userRepository})
+  RegisterAddress(
+      {Key key,
+      @required UserRepository userRepository,
+      @required this.firstName,
+      @required this.lastName,
+      @required this.dateOfBirth,
+      @required this.gender})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
-  
+
   State<RegisterAddress> createState() => _RegisterAddressState();
 }
 
@@ -143,11 +153,19 @@ class _RegisterAddressState extends State<RegisterAddress> {
                   RegisterAddressButton(
                     onPressed: isRegisterButtonEnabled(state)
                         ? () {
-                            //pass in the details of firstname and last name
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => RegisterPinScreen(userRepository: widget._userRepository,),
+                                builder: (context) => RegisterPinScreen(
+                                  userRepository: widget._userRepository,
+                                  firstName: widget.firstName,
+                                  lastName: widget.lastName,
+                                  dateOfBirth: widget.dateOfBirth,
+                                  gender: widget.gender,
+                                  streetAddress: _streetAddressController.text,
+                                  city: _cityController.text,
+                                  state: _stateController.text
+                                ),
                               ),
                             );
                           }

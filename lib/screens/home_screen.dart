@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
               BlocProvider.of<AuthenticationBloc>(context).add(
                 LoggedOut(),
               );
+              print('logout button pressed');
             },
           )
         ],

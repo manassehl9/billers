@@ -6,8 +6,26 @@ import 'package:payment_app/user_repository.dart';
 
 class RegisterProfileScreen extends StatelessWidget {
   final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
+  final String dateOfBirth;
+  final String gender;
+  final String streetAddress;
+  final String city;
+  final String state;
+  final String pin;
 
-  RegisterProfileScreen({Key key, @required UserRepository userRepository})
+  RegisterProfileScreen(
+      {Key key,
+      @required UserRepository userRepository,
+      @required this.firstName,
+      @required this.lastName,
+      @required this.dateOfBirth,
+      @required this.gender,
+      @required this.streetAddress,
+      @required this.city,
+      @required this.state,
+      @required this.pin})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -18,8 +36,16 @@ class RegisterProfileScreen extends StatelessWidget {
       appBar: AppBar(title: Text('Register')),
       body: Center(
         child: BlocProvider<RegisterProfileBloc>(
-          create: (context) =>
-              RegisterProfileBloc(userRepository: _userRepository),
+          create: (context) => RegisterProfileBloc(
+              userRepository: _userRepository,
+              firstName: firstName,
+              lastName: lastName,
+              dateOfBirth: dateOfBirth,
+              gender: gender,
+              streetAddress: streetAddress,
+              city: city,
+              states: state,
+              pin: pin),
           child: RegisterProfile(),
         ),
       ),

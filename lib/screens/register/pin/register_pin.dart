@@ -11,8 +11,24 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class RegisterPin extends StatefulWidget {
   final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
+  final String dateOfBirth;
+  final String gender;
+  final String streetAddress;
+  final String city;
+  final String state;
 
-  RegisterPin({Key key, @required UserRepository userRepository})
+  RegisterPin(
+      {Key key,
+      @required UserRepository userRepository,
+      @required this.firstName,
+      @required this.lastName,
+      @required this.dateOfBirth,
+      @required this.gender,
+      @required this.streetAddress,
+      @required this.city,
+      @required this.state})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -24,12 +40,12 @@ class _RegisterPinState extends State<RegisterPin> {
   var onTapRecognizer;
 
   TextEditingController _pinController = TextEditingController();
+  bool autoDisposeControllers = false;
 
-  StreamController<ErrorAnimationType> errorController;
+  StreamController<ErrorAnimationType> pinErrorController;
 
-  bool hasError = false;
+  bool pinHasError = false;
   String currentText = "";
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   bool get isPopulated => _pinController.text.isNotEmpty;
 
@@ -43,7 +59,7 @@ class _RegisterPinState extends State<RegisterPin> {
       ..onTap = () {
         Navigator.pop(context);
       };
-    errorController = StreamController<ErrorAnimationType>();
+    pinErrorController = StreamController<ErrorAnimationType>();
     super.initState();
     _registerPinBloc = BlocProvider.of<RegisterPinBloc>(context);
     _pinController.addListener(_onPinChanged);
@@ -115,6 +131,7 @@ class _RegisterPinState extends State<RegisterPin> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 30),
                       child: PinCodeTextField(
+                        autoDisposeControllers: false,
                         length: 6,
                         obsecureText: false,
                         animationType: AnimationType.fade,
@@ -128,7 +145,7 @@ class _RegisterPinState extends State<RegisterPin> {
                         animationDuration: Duration(milliseconds: 300),
                         backgroundColor: Colors.blue.shade50,
                         enableActiveFill: true,
-                        errorAnimationController: errorController,
+                        errorAnimationController: pinErrorController,
                         controller: _pinController,
                         onCompleted: (v) {
                           print("Completed");
@@ -149,7 +166,9 @@ class _RegisterPinState extends State<RegisterPin> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: Text(
-                      hasError ? "*Please fill up all the cells properly" : "",
+                      pinHasError
+                          ? "*Please fill up all the cells properly"
+                          : "",
                       style:
                           TextStyle(color: Colors.red.shade300, fontSize: 15),
                     ),
@@ -174,18 +193,25 @@ class _RegisterPinState extends State<RegisterPin> {
                         onPressed: () {
                           // conditions for validating
                           if (currentText.length != 6) {
-                            errorController.add(ErrorAnimationType
+                            pinErrorController.add(ErrorAnimationType
                                 .shake); // Triggering error shake animation
                             setState(() {
-                              hasError = true;
+                              pinHasError = true;
                             });
                           } else {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => RegisterConfirmPinScreen(
-                                  userRepository: widget._userRepository,
-                                ),
+                                    userRepository: widget._userRepository,
+                                    firstName: widget.firstName,
+                                    lastName: widget.lastName,
+                                    dateOfBirth: widget.dateOfBirth,
+                                    gender: widget.gender,
+                                    streetAddress: widget.streetAddress,
+                                    city: widget.city,
+                                    state: widget.state,
+                                    pin: _pinController.text),
                               ),
                             );
                           }

@@ -6,8 +6,18 @@ import 'package:payment_app/user_repository.dart';
 
 class RegisterAddressScreen extends StatelessWidget {
   final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
+  final String dateOfBirth;
+  final String gender;
 
-  RegisterAddressScreen({Key key, @required UserRepository userRepository})
+  RegisterAddressScreen(
+      {Key key,
+      @required UserRepository userRepository,
+      @required this.firstName,
+      @required this.lastName,
+      @required this.dateOfBirth,
+      @required this.gender})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -20,6 +30,10 @@ class RegisterAddressScreen extends StatelessWidget {
           create: (context) => RegisterAddressBloc(),
           child: RegisterAddress(
             userRepository: _userRepository,
+            firstName: firstName,
+            lastName: lastName,
+            dateOfBirth: dateOfBirth,
+            gender: gender
           ),
         ),
       ),

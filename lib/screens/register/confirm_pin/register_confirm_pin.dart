@@ -10,8 +10,26 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class RegisterConfirmPin extends StatefulWidget {
   final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
+  final String dateOfBirth;
+  final String gender;
+  final String streetAddress;
+  final String city;
+  final String state;
+  final String pin;
 
-  RegisterConfirmPin({Key key, @required UserRepository userRepository})
+  RegisterConfirmPin(
+      {Key key,
+      @required UserRepository userRepository,
+      @required this.firstName,
+      @required this.lastName,
+      @required this.dateOfBirth,
+      @required this.gender,
+      @required this.streetAddress,
+      @required this.city,
+      @required this.state,
+      @required this.pin})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -22,15 +40,16 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
   RegisterConfirmPinBloc _registerConfirmPinBloc;
   var onTapRecognizer;
 
-  TextEditingController _pinController = TextEditingController();
+  TextEditingController _confirmPinController = TextEditingController();
 
   StreamController<ErrorAnimationType> errorController;
+  bool autoDisposeControllers = false;
 
   bool hasError = false;
   String currentText = "";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool get isPopulated => _pinController.text.isNotEmpty;
+  bool get isPopulated => _confirmPinController.text.isNotEmpty;
 
   bool isRegisterButtonEnabled(RegisterConfirmPinState state) {
     return state.isFormValid && isPopulated;
@@ -45,7 +64,7 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
     errorController = StreamController<ErrorAnimationType>();
     super.initState();
     _registerConfirmPinBloc = BlocProvider.of<RegisterConfirmPinBloc>(context);
-    _pinController.addListener(_onConfirmPinChanged);
+    _confirmPinController.addListener(_onConfirmPinChanged);
   }
 
   @override
@@ -114,6 +133,7 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 30),
                       child: PinCodeTextField(
+                        autoDisposeControllers: false,
                         length: 6,
                         obsecureText: false,
                         animationType: AnimationType.fade,
@@ -128,7 +148,7 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
                         backgroundColor: Colors.blue.shade50,
                         enableActiveFill: true,
                         errorAnimationController: errorController,
-                        controller: _pinController,
+                        controller: _confirmPinController,
                         onCompleted: (v) {
                           print("Completed");
                         },
@@ -148,7 +168,7 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: Text(
-                      hasError ? "*Please fill up all the cells properly" : "",
+                      hasError ? "*Pin code does not match" : "",
                       style:
                           TextStyle(color: Colors.red.shade300, fontSize: 15),
                     ),
@@ -172,7 +192,8 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
                       child: FlatButton(
                         onPressed: () {
                           // conditions for validating
-                          if (currentText.length != 6) {
+                          if (currentText.length != 6 ||
+                              currentText != widget.pin) {
                             errorController.add(ErrorAnimationType
                                 .shake); // Triggering error shake animation
                             setState(() {
@@ -183,8 +204,15 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => RegisterProfileScreen(
-                                  userRepository: widget._userRepository,
-                                ),
+                                    userRepository: widget._userRepository,
+                                    firstName: widget.firstName,
+                                    lastName: widget.lastName,
+                                    dateOfBirth: widget.dateOfBirth,
+                                    gender: widget.gender,
+                                    streetAddress: widget.streetAddress,
+                                    city: widget.city,
+                                    state: widget.state,
+                                    pin: _confirmPinController.text),
                               ),
                             );
                           }
@@ -229,13 +257,14 @@ class _RegisterConfirmPinState extends State<RegisterConfirmPin> {
 
   @override
   void dispose() {
-    _pinController.dispose();
+    _confirmPinController.dispose();
+    errorController.close();
     super.dispose();
   }
 
   void _onConfirmPinChanged() {
     _registerConfirmPinBloc.add(
-      ConfirmPinChanged(pin: _pinController.text),
+      ConfirmPinChanged(pin: _confirmPinController.text),
     );
   }
 }

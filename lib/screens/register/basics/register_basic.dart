@@ -9,8 +9,10 @@ import 'package:payment_app/user_repository.dart';
 
 class RegisterBasic extends StatefulWidget {
   final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
 
-  RegisterBasic({Key key, @required UserRepository userRepository})
+  RegisterBasic({Key key, @required UserRepository userRepository, @required this.firstName, @required this.lastName})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -177,6 +179,10 @@ class _RegisterBasicState extends State<RegisterBasic> {
                               MaterialPageRoute(
                                 builder: (context) => RegisterAddressScreen(
                                   userRepository: widget._userRepository,
+                                  firstName: widget.firstName,
+                                  lastName: widget.lastName,
+                                  dateOfBirth: _dateofBirthController.text,
+                                  gender: _genderController.text
                                 ),
                               ),
                             );
