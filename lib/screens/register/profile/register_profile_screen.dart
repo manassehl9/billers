@@ -46,7 +46,16 @@ class RegisterProfileScreen extends StatelessWidget {
               city: city,
               states: state,
               pin: pin),
-          child: RegisterProfile(),
+          child: RegisterProfile(
+              userRepository: _userRepository,
+              firstName: firstName,
+              lastName: lastName,
+              dateOfBirth: dateOfBirth,
+              gender: gender,
+              streetAddress: streetAddress,
+              city: city,
+              states: state,
+              pin: pin),
         ),
       ),
     );

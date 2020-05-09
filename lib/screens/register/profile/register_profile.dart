@@ -1,13 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
-import 'package:payment_app/screens/login/login.dart';
 import 'package:payment_app/screens/register/profile/bloc/bloc.dart';
 import 'package:payment_app/screens/register/profile/register_profile_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:payment_app/user_repository.dart';
 
 class RegisterProfile extends StatefulWidget {
+  final UserRepository _userRepository;
+  final String firstName;
+  final String lastName;
+  final String dateOfBirth;
+  final String gender;
+  final String streetAddress;
+  final String city;
+  final String states;
+  final String pin;
+
+  RegisterProfile(
+      {Key key,
+      @required UserRepository userRepository,
+      @required this.firstName,
+      @required this.lastName,
+      @required this.dateOfBirth,
+      @required this.gender,
+      @required this.streetAddress,
+      @required this.city,
+      @required this.states,
+      @required this.pin})
+      : assert(userRepository != null),
+        _userRepository = userRepository,
+        super(key: key);
   State<RegisterProfile> createState() => _RegisterProfileState();
 }
 
@@ -129,13 +153,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
                     onPressed: isRegisterButtonEnabled(state)
                         ? () async {
                             _onFormSubmitted();
-
-                            await Firestore.instance
-                                .collection('registered_data')
-                                .document()
-                                .setData({})
-                                .then((result) => print('here'))
-                                .catchError((err) => print(err));
+                           
                           }
                         : null,
                   ),
