@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:payment_app/screens/register/profile/bloc/bloc.dart';
-import 'package:payment_app/user_repository.dart';
+import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/validators.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -41,7 +41,8 @@ class RegisterProfileBloc
     TransitionFunction<RegisterProfileEvent, RegisterProfileState> transitionFn,
   ) {
     final nonDebounceStream = events.where((event) {
-      return (event is! ProfileEmailChanged && event is! ProfilePasswordChanged);
+      return (event is! ProfileEmailChanged &&
+          event is! ProfilePasswordChanged);
     });
     final debounceStream = events.where((event) {
       return (event is ProfileEmailChanged || event is ProfilePasswordChanged);
@@ -85,17 +86,16 @@ class RegisterProfileBloc
     yield RegisterProfileState.loading();
     try {
       await _userRepository.signUp(
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        dateOfBirth: dateOfBirth,
-        gender: gender,
-        streetAddress: streetAddress,
-        city: city,
-        states: states,
-        pin: pin
-      );
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          dateOfBirth: dateOfBirth,
+          gender: gender,
+          streetAddress: streetAddress,
+          city: city,
+          states: states,
+          pin: pin);
       yield RegisterProfileState.success();
     } catch (_) {
       yield RegisterProfileState.failure();

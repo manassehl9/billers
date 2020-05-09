@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
+import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/screens/home_screen.dart';
 import 'package:payment_app/screens/login/login_screen.dart';
 import 'package:payment_app/screens/splash_screen.dart';
 import 'package:payment_app/simple_bloc_delegate.dart';
-import 'package:payment_app/user_repository.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

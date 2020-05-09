@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/address/register_address_screen.dart';
 import 'package:payment_app/screens/register/basics/bloc/bloc.dart';
 import 'package:payment_app/screens/register/basics/register_basic_button.dart';
-import 'package:payment_app/user_repository.dart';
+import 'package:payment_app/resources/user_repository.dart';
 
 class RegisterBasic extends StatefulWidget {
   final UserRepository _userRepository;

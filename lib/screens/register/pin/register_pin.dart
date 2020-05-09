@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/confirm_pin/confirm_pin.dart';
 import 'package:payment_app/screens/register/pin/pin.dart';
-import 'package:payment_app/user_repository.dart';
+import 'package:payment_app/resources/user_repository.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class RegisterPin extends StatefulWidget {

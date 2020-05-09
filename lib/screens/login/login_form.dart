@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
+import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/screens/login/login.dart';
-import 'package:payment_app/user_repository.dart';
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -49,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
               SnackBar(
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Login Failure'), Icon(Icons.error)],
+                  children: [Text(state.isError), Icon(Icons.error)],
                 ),
                 backgroundColor: Colors.red,
               ),

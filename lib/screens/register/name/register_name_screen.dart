@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/name/bloc/register_name_bloc.dart';
 import 'package:payment_app/screens/register/name/name.dart';
-import 'package:payment_app/user_repository.dart';
+import 'package:payment_app/resources/user_repository.dart';
 
 class RegisterNameScreen extends StatelessWidget {
   final UserRepository _userRepository;

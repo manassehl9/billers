@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/confirm_pin/confirm_pin.dart';
-import 'package:payment_app/user_repository.dart';
+import 'package:payment_app/resources/user_repository.dart';
 
 class RegisterConfirmPinScreen extends StatelessWidget {
   final UserRepository _userRepository;

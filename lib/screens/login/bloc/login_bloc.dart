@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:payment_app/screens/login/login.dart';
-import 'package:payment_app/user_repository.dart';
+import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/validators.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -66,8 +66,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _userRepository.signInWithGoogle();
       yield LoginState.success();
-    } catch (_) {
-      yield LoginState.failure();
+    } catch (e) {
+      yield LoginState.failure(e.toString());
     }
   }
 
@@ -79,8 +79,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _userRepository.signInWithCredentials(email, password);
       yield LoginState.success();
-    } catch (_) {
-      yield LoginState.failure();
+    } catch (e) {
+      yield LoginState.failure(e.toString());
     }
   }
 }

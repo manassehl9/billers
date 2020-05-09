@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
 import 'package:payment_app/screens/register/profile/bloc/bloc.dart';
 import 'package:payment_app/screens/register/profile/register_profile_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:payment_app/user_repository.dart';
+import 'package:payment_app/resources/user_repository.dart';
 
 class RegisterProfile extends StatefulWidget {
   final UserRepository _userRepository;
