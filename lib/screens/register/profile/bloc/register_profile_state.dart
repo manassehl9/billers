@@ -7,16 +7,17 @@ class RegisterProfileState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
+  final String isError;
 
   bool get isFormValid => isEmailValid && isPasswordValid;
 
-  RegisterProfileState({
-    @required this.isEmailValid,
-    @required this.isPasswordValid,
-    @required this.isSubmitting,
-    @required this.isSuccess,
-    @required this.isFailure,
-  });
+  RegisterProfileState(
+      {@required this.isEmailValid,
+      @required this.isPasswordValid,
+      @required this.isSubmitting,
+      @required this.isSuccess,
+      @required this.isFailure,
+      this.isError});
 
   factory RegisterProfileState.empty() {
     return RegisterProfileState(
@@ -38,14 +39,14 @@ class RegisterProfileState {
     );
   }
 
-  factory RegisterProfileState.failure() {
+  factory RegisterProfileState.failure(String error) {
     return RegisterProfileState(
-      isEmailValid: true,
-      isPasswordValid: true,
-      isSubmitting: false,
-      isSuccess: false,
-      isFailure: true,
-    );
+        isEmailValid: true,
+        isPasswordValid: true,
+        isSubmitting: false,
+        isSuccess: false,
+        isFailure: true,
+        isError: error);
   }
 
   factory RegisterProfileState.success() {

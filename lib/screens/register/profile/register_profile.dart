@@ -85,7 +85,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Registration Failure'),
+                    Text(state.isError),
                     Icon(Icons.error),
                   ],
                 ),
@@ -149,10 +149,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
                   ),
                   RegisterProfileButton(
                     onPressed: isRegisterButtonEnabled(state)
-                        ? () async {
-                            _onFormSubmitted();
-                           
-                          }
+                        ? _onFormSubmitted
                         : null,
                   ),
                 ],

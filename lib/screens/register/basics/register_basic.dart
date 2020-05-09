@@ -4,15 +4,19 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/address/register_address_screen.dart';
 import 'package:payment_app/screens/register/basics/bloc/bloc.dart';
-import 'package:payment_app/screens/register/basics/register_basic_button.dart';
 import 'package:payment_app/resources/user_repository.dart';
+import 'package:payment_app/widgets/button.dart';
 
 class RegisterBasic extends StatefulWidget {
   final UserRepository _userRepository;
   final String firstName;
   final String lastName;
 
-  RegisterBasic({Key key, @required UserRepository userRepository, @required this.firstName, @required this.lastName})
+  RegisterBasic(
+      {Key key,
+      @required UserRepository userRepository,
+      @required this.firstName,
+      @required this.lastName})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -170,24 +174,11 @@ class _RegisterBasicState extends State<RegisterBasic> {
                   SizedBox(
                     height: 20,
                   ),
-                  RegisterBasicButton(
+                  Button(
                     onPressed: isRegisterButtonEnabled(state)
-                        ? () {
-                            //pass in the details of firstname and last name
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterAddressScreen(
-                                  userRepository: widget._userRepository,
-                                  firstName: widget.firstName,
-                                  lastName: widget.lastName,
-                                  dateOfBirth: _dateofBirthController.text,
-                                  gender: _genderController.text
-                                ),
-                              ),
-                            );
-                          }
+                        ? _onFormSubmitted
                         : null,
+                    buttonName: 'Next',
                   ),
                 ],
               ),
@@ -219,10 +210,15 @@ class _RegisterBasicState extends State<RegisterBasic> {
   }
 
   void _onFormSubmitted() {
-    _registerBasicBloc.add(
-      Submitted(
-        dateOfBirth: _dateofBirthController.text,
-        gender: _genderController.text,
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RegisterAddressScreen(
+            userRepository: widget._userRepository,
+            firstName: widget.firstName,
+            lastName: widget.lastName,
+            dateOfBirth: _dateofBirthController.text,
+            gender: _genderController.text),
       ),
     );
   }

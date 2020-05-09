@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/screens/register/address/bloc/bloc.dart';
-import 'package:payment_app/screens/register/address/register_address_button.dart';
 import 'package:payment_app/screens/register/pin/register_pin_screen.dart';
+import 'package:payment_app/widgets/button.dart';
 
 class RegisterAddress extends StatefulWidget {
   final UserRepository _userRepository;
@@ -150,26 +150,11 @@ class _RegisterAddressState extends State<RegisterAddress> {
                   SizedBox(
                     height: 20,
                   ),
-                  RegisterAddressButton(
+                  Button(
                     onPressed: isRegisterButtonEnabled(state)
-                        ? () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterPinScreen(
-                                  userRepository: widget._userRepository,
-                                  firstName: widget.firstName,
-                                  lastName: widget.lastName,
-                                  dateOfBirth: widget.dateOfBirth,
-                                  gender: widget.gender,
-                                  streetAddress: _streetAddressController.text,
-                                  city: _cityController.text,
-                                  state: _stateController.text
-                                ),
-                              ),
-                            );
-                          }
+                        ? _onFormSubmitted
                         : null,
+                    buttonName: 'Next',
                   ),
                 ],
               ),
@@ -208,11 +193,19 @@ class _RegisterAddressState extends State<RegisterAddress> {
   }
 
   void _onFormSubmitted() {
-    _registerAddressBloc.add(
-      Submitted(
-          streetAddress: _streetAddressController.text,
-          city: _cityController.text,
-          state: _stateController.text),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RegisterPinScreen(
+            userRepository: widget._userRepository,
+            firstName: widget.firstName,
+            lastName: widget.lastName,
+            dateOfBirth: widget.dateOfBirth,
+            gender: widget.gender,
+            streetAddress: _streetAddressController.text,
+            city: _cityController.text,
+            state: _stateController.text),
+      ),
     );
   }
 }

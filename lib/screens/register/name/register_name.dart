@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/basics/register_basic_screen.dart';
 import 'package:payment_app/screens/register/name/bloc/bloc.dart';
-import 'package:payment_app/screens/register/name/register_name_button.dart';
 import 'package:payment_app/resources/user_repository.dart';
+import 'package:payment_app/widgets/button.dart';
 
 class RegisterName extends StatefulWidget {
   final UserRepository _userRepository;
@@ -111,21 +111,11 @@ class _RegisterNameState extends State<RegisterName> {
                   SizedBox(
                     height: 20,
                   ),
-                  RegisterNameButton(
+                  Button(
                     onPressed: isRegisterButtonEnabled(state)
-                        ? () {
-                            //pass in the details of firstname and last name
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterBasicScreen(
-                                    userRepository: widget._userRepository,
-                                    firstName: _firstNameController.text,
-                                    lastName: _lastNameController.text),
-                              ),
-                            );
-                          }
+                        ? _onFormSubmitted
                         : null,
+                    buttonName: 'Next',
                   ),
                 ],
               ),
@@ -153,6 +143,18 @@ class _RegisterNameState extends State<RegisterName> {
   void _onLastNameChanged() {
     _registerNameBloc.add(
       LastNameChanged(lastName: _lastNameController.text),
+    );
+  }
+
+  void _onFormSubmitted() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RegisterBasicScreen(
+            userRepository: widget._userRepository,
+            firstName: _firstNameController.text,
+            lastName: _lastNameController.text),
+      ),
     );
   }
 }

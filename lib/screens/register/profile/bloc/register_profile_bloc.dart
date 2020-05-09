@@ -97,8 +97,8 @@ class RegisterProfileBloc
           states: states,
           pin: pin);
       yield RegisterProfileState.success();
-    } catch (_) {
-      yield RegisterProfileState.failure();
+    } catch (e) {
+      yield RegisterProfileState.failure(e.toString());
     }
   }
 }

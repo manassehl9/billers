@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RegisterProfileButton extends StatelessWidget {
+class Button extends StatelessWidget {
   final VoidCallback _onPressed;
+  final String buttonName;
 
-  RegisterProfileButton({Key key, VoidCallback onPressed})
+  Button({Key key, VoidCallback onPressed, @required this.buttonName})
       : _onPressed = onPressed,
         super(key: key);
 
@@ -30,7 +31,7 @@ class RegisterProfileButton extends StatelessWidget {
                       end: Alignment.centerRight,
                       colors: [Color(0xfffbb448), Color(0xfff7892b)])),
               child: Text(
-                'Submit',
+                buttonName,
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             )
@@ -56,7 +57,7 @@ class RegisterProfileButton extends StatelessWidget {
                     ]),
               ),
               child: Text(
-                'Submit',
+                buttonName,
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),

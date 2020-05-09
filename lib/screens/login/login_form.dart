@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
 import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/screens/login/login.dart';
+import 'package:payment_app/widgets/button.dart';
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -129,14 +130,11 @@ class _LoginFormState extends State<LoginForm> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        LoginButton(
-                          onPressed: isLoginButtonEnabled(state)
-                              ? () {
-                                  print('hey');
-                                  _onFormSubmitted();
-                                }
-                              : null,
-                        ),
+                        Button(
+                            onPressed: isLoginButtonEnabled(state)
+                                ? _onFormSubmitted
+                                : null,
+                            buttonName: 'Login'),
                         Container(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           alignment: Alignment.centerRight,

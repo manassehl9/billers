@@ -80,10 +80,34 @@ class UserRepository {
       String city,
       String states,
       String pin}) async {
-    AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
-    FirebaseUser user = result.user;
-    String uid = user.uid;
+    AuthResult result;
+    String uid;
+    FirebaseUser user;
+    String errorMessage;
+    try {
+      result = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      user = result.user;
+      uid = user.uid;
+    } catch (error) {
+      switch (error.code) {
+        case "ERROR_EMAIL_ALREADY_IN_USE":
+          errorMessage = "Email address already in use";
+          break;
+        case "ERROR_TOO_MANY_REQUESTS":
+          errorMessage = "Too many requests. Try again later.";
+          break;
+        case "ERROR_OPERATION_NOT_ALLOWED":
+          errorMessage = "Signing in with Email and Password is not enabled.";
+          break;
+        default:
+          errorMessage = "An undefined Error happened.";
+      }
+    }
+
+    if (errorMessage != null) {
+      return Future.error(errorMessage);
+    }
 
     // Check if user is already registered
     final snapShot =
@@ -103,8 +127,7 @@ class UserRepository {
           states: states,
           pin: pin);
     }
-
-    return user.uid;
+    return uid;
   }
 
   Future<void> signOut() async {
