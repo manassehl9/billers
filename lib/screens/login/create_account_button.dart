@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/screens/register/name/register_name_screen.dart';
+import 'package:payment_app/utils/appTheme.dart';
 
 class CreateAccountButton extends StatelessWidget {
   final UserRepository _userRepository;
@@ -20,7 +21,10 @@ class CreateAccountButton extends StatelessWidget {
         children: <Widget>[
           Text(
             'Don\'t have an account ?',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.getTheme().primaryColor),
           ),
           SizedBox(
             width: 10,
@@ -38,7 +42,7 @@ class CreateAccountButton extends StatelessWidget {
             child: Text(
               'Register',
               style: TextStyle(
-                  color: Color(0xfff79c4f),
+                  color: AppTheme.getTheme().colorScheme.primary,
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),

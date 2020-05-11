@@ -22,6 +22,7 @@ dependencies:
   flutter_bloc: ^4.0.0
   firebase_core: ^0.4.3+3
   google_sign_in: ^4.1.1
+  google_fonts: ^0.3.5
   firebase_auth: ^0.15.4
   equatable: ^1.0.0
   meta: ^1.1.6
@@ -32,6 +33,7 @@ dependencies:
   pin_code_fields: ^3.0.0
   flare_flutter: ^2.0.3
   cloud_firestore: ^0.13.0+1
+  charts_flutter: ^0.9.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -57,6 +59,10 @@ flutter:
   assets:
     - assets/verify.png
     - assets/otp.flr
+    - assets/free_registration.jpg
+    - assets/calendar.png
+    - assets/map.jpg
+    - assets/join.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

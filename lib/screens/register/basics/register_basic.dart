@@ -67,6 +67,11 @@ class _RegisterBasicState extends State<RegisterBasic> {
             child: Form(
               child: ListView(
                 children: <Widget>[
+                  Image.asset(
+                    'assets/calendar.png',
+                    height: MediaQuery.of(context).size.height / 3,
+                    fit: BoxFit.fitHeight,
+                  ),
                   Text('The Basics',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),

@@ -64,6 +64,11 @@ class _RegisterAddressState extends State<RegisterAddress> {
             child: Form(
               child: ListView(
                 children: <Widget>[
+                  Image.asset(
+                    'assets/map.jpg',
+                    height: MediaQuery.of(context).size.height / 3,
+                    fit: BoxFit.fitHeight,
+                  ),
                   Text('Where do you live?',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),

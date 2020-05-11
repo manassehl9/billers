@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
 import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/screens/login/login.dart';
+import 'package:payment_app/utils/appTheme.dart';
 import 'package:payment_app/widgets/button.dart';
 
 class LoginForm extends StatefulWidget {
@@ -77,53 +79,79 @@ class _LoginFormState extends State<LoginForm> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          return Padding(
-            padding: EdgeInsets.all(20.0),
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Form(
-              child: ListView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Email',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  Expanded(
+                    flex: 5,
+                    child: SizedBox(),
                   ),
+                  _title(),
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        fillColor: Color(0xfff3f3f4),
-                        filled: true),
-                    keyboardType: TextInputType.emailAddress,
-                    autovalidate: true,
-                    autocorrect: false,
-                    validator: (_) {
-                      return !state.isEmailValid ? 'Invalid Email' : null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Password',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        fillColor: Color(0xfff3f3f4),
-                        filled: true),
-                    obscureText: true,
-                    autovalidate: true,
-                    autocorrect: false,
-                    validator: (_) {
-                      return !state.isPasswordValid ? 'Invalid Password' : null;
-                    },
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Email',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: AppTheme.getTheme().colorScheme.primary),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Color(0xfff3f3f4),
+                              filled: true),
+                          keyboardType: TextInputType.emailAddress,
+                          autovalidate: true,
+                          autocorrect: false,
+                          validator: (_) {
+                            return !state.isEmailValid ? 'Invalid Email' : null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Password',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: AppTheme.getTheme().colorScheme.primary),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Color(0xfff3f3f4),
+                              filled: true),
+                          obscureText: true,
+                          autovalidate: true,
+                          autocorrect: false,
+                          validator: (_) {
+                            return !state.isPasswordValid
+                                ? 'Invalid Password'
+                                : null;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
@@ -140,7 +168,10 @@ class _LoginFormState extends State<LoginForm> {
                           alignment: Alignment.centerRight,
                           child: Text('Forgot Password ?',
                               style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500)),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color:
+                                      AppTheme.getTheme().colorScheme.primary)),
                         ),
 
                         //Divider
@@ -159,7 +190,13 @@ class _LoginFormState extends State<LoginForm> {
                                   ),
                                 ),
                               ),
-                              Text('or'),
+                              Text(
+                                'or',
+                                style: TextStyle(
+                                    color: AppTheme.getTheme()
+                                        .colorScheme
+                                        .primary),
+                              ),
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 10),
@@ -185,6 +222,32 @@ class _LoginFormState extends State<LoginForm> {
           );
         },
       ),
+    );
+  }
+
+  Widget _title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+          text: 'Dev',
+          style: GoogleFonts.portLligatSans(
+            textStyle: Theme.of(context).textTheme.bodyText1,
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color: AppTheme.getTheme().primaryColor,
+          ),
+          children: [
+            TextSpan(
+              text: 'Man',
+              style: TextStyle(
+                  color: AppTheme.getTheme().accentColor, fontSize: 30),
+            ),
+            TextSpan(
+              text: 'ny',
+              style: TextStyle(
+                  color: AppTheme.getTheme().primaryColor, fontSize: 30),
+            ),
+          ]),
     );
   }
 

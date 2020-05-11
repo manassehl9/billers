@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payment_app/utils/appTheme.dart';
 
 class Button extends StatelessWidget {
   final VoidCallback _onPressed;
@@ -29,7 +30,10 @@ class Button extends StatelessWidget {
                   gradient: LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
-                      colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+                      colors: [
+                        AppTheme.getTheme().colorScheme.primary,
+                        AppTheme.getTheme().colorScheme.secondary
+                      ])),
               child: Text(
                 buttonName,
                 style: TextStyle(fontSize: 20, color: Colors.white),
@@ -52,8 +56,8 @@ class Button extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      Color(0xfffbb448).withOpacity(0.4),
-                      Color(0xfff7892b).withOpacity(0.2)
+                      AppTheme.getTheme().colorScheme.primary.withOpacity(0.4),
+                      AppTheme.getTheme().colorScheme.primary.withOpacity(0.2)
                     ]),
               ),
               child: Text(

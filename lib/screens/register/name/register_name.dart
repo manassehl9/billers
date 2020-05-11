@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/basics/register_basic_screen.dart';
 import 'package:payment_app/screens/register/name/bloc/bloc.dart';
 import 'package:payment_app/resources/user_repository.dart';
+import 'package:payment_app/utils/appTheme.dart';
 import 'package:payment_app/widgets/button.dart';
 
 class RegisterName extends StatefulWidget {
@@ -48,9 +49,16 @@ class _RegisterNameState extends State<RegisterName> {
             child: Form(
               child: ListView(
                 children: <Widget>[
-                  Text('Your Name',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  Image.asset(
+                    'assets/join.png',
+                    height: MediaQuery.of(context).size.height / 3,
+                    fit: BoxFit.fitHeight,
+                  ),
+                  Text('Tell Us Your Name',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: AppTheme.getTheme().colorScheme.primary)),
                   SizedBox(
                     height: 30,
                   ),
@@ -63,7 +71,10 @@ class _RegisterNameState extends State<RegisterName> {
                   ),
                   Text(
                     'First Name',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,
@@ -88,7 +99,10 @@ class _RegisterNameState extends State<RegisterName> {
                   ),
                   Text(
                     'Last Name',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,

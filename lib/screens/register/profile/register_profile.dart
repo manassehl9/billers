@@ -101,6 +101,11 @@ class _RegisterProfileState extends State<RegisterProfile> {
             child: Form(
               child: ListView(
                 children: <Widget>[
+                  Image.asset(
+                    'assets/free_registration.jpg',
+                    height: MediaQuery.of(context).size.height / 3,
+                    fit: BoxFit.fitHeight,
+                  ),
                   Text(
                     'Email',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
