@@ -121,6 +121,7 @@ class UserRepository {
           password: password,
           firstName: firstName,
           lastName: lastName,
+          gender: gender,
           dateOfBirth: dateOfBirth,
           streetAddress: streetAddress,
           city: city,

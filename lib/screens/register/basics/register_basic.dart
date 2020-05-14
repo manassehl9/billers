@@ -49,8 +49,8 @@ class _RegisterBasicState extends State<RegisterBasic> {
     setState(() {
       _dropdownItems.add(GenderModel(gender: 'Male'));
       _dropdownItems.add(GenderModel(gender: 'Female'));
-      _dropdownValue = _dropdownItems[0];
-      _genderController.text = _dropdownValue.gender;
+      _dropdownValue = null;
+      //   _genderController.text = _dropdownValue.gender;
     });
     _registerBasicBloc = BlocProvider.of<RegisterBasicBloc>(context);
     _dateofBirthController.addListener(_onDateOfBirthChanged);
