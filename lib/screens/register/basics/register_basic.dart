@@ -149,7 +149,7 @@ class _RegisterBasicState extends State<RegisterBasic> {
                         autocorrect: false,
                         validator: (_) {
                           return !state.isDateOfBirthValid
-                              ? 'Date of birth cannot be empty'
+                              ? 'Pick a date'
                               : null;
                         },
                       ),

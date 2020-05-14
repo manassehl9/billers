@@ -38,15 +38,19 @@ class RegisterNameBloc extends Bloc<RegisterNameEvent, RegisterNameState> {
 
   Stream<RegisterNameState> _mapFirstNameChangedToState(
       String firstName) async* {
-    yield state.update(
-      isFirstNameValid: Validators.isValidFirstName(firstName),
-    );
+    if (firstName.length > 0) {
+      yield state.update(
+        isFirstNameValid: Validators.isValidString(firstName),
+      );
+    }
   }
 
   Stream<RegisterNameState> _mapLastNameChangedToState(String lastName) async* {
-    yield state.update(
-      isLastNameValid: Validators.isValidLastName(lastName),
-    );
+    if (lastName.length > 0) {
+      yield state.update(
+        isLastNameValid: Validators.isValidString(lastName),
+      );
+    }
   }
 
   Stream<RegisterNameState> _mapFormSubmittedToState(

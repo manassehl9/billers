@@ -100,7 +100,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
       child: BlocBuilder<RegisterProfileBloc, RegisterProfileState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Form(
               child: ListView(
                 children: <Widget>[

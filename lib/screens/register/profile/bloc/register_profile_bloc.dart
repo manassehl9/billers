@@ -67,16 +67,20 @@ class RegisterProfileBloc
   }
 
   Stream<RegisterProfileState> _mapEmailChangedToState(String email) async* {
-    yield state.update(
-      isEmailValid: Validators.isValidEmail(email),
-    );
+    if (email.length > 0) {
+      yield state.update(
+        isEmailValid: Validators.isValidEmail(email),
+      );
+    }
   }
 
   Stream<RegisterProfileState> _mapPasswordChangedToState(
       String password) async* {
-    yield state.update(
-      isPasswordValid: Validators.isValidPassword(password),
-    );
+    if (password.length > 0) {
+      yield state.update(
+        isPasswordValid: Validators.isValidPassword(password),
+      );
+    }
   }
 
   Stream<RegisterProfileState> _mapFormSubmittedToState(

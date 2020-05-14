@@ -46,20 +46,26 @@ class RegisterAddressBloc
 
   Stream<RegisterAddressState> _mapStreetAddressChangedToState(
       String streetAddress) async* {
-    yield state.update(
-      isStreetAddressValid: Validators.isValidString(streetAddress),
-    );
+    if (streetAddress.length > 0) {
+      yield state.update(
+        isStreetAddressValid: Validators.isValidString(streetAddress),
+      );
+    }
   }
 
   Stream<RegisterAddressState> _mapCityChangedToState(String city) async* {
-    yield state.update(
-      isCityValid: Validators.isValidString(city),
-    );
+    if (city.length > 0) {
+      yield state.update(
+        isCityValid: Validators.isValidString(city),
+      );
+    }
   }
 
   Stream<RegisterAddressState> _mapStateChangedToState(String states) async* {
-    yield state.update(
-      isStateValid: Validators.isValidString(states),
-    );
+    if (states.length > 0) {
+      yield state.update(
+        isStateValid: Validators.isValidString(states),
+      );
+    }
   }
 }
