@@ -229,8 +229,8 @@ class _RegisterProfileState extends State<RegisterProfile> {
   void _onFormSubmitted() {
     _registerProfileBloc.add(
       ProfileSubmitted(
-        email: _emailController.text,
-        password: _passwordController.text,
+        email: _emailController.text.toLowerCase().trim(),
+        password: _passwordController.text.trim(),
       ),
     );
   }

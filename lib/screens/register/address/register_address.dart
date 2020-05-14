@@ -224,9 +224,9 @@ class _RegisterAddressState extends State<RegisterAddress> {
             lastName: widget.lastName,
             dateOfBirth: widget.dateOfBirth,
             gender: widget.gender,
-            streetAddress: _streetAddressController.text,
-            city: _cityController.text,
-            state: _stateController.text),
+            streetAddress: _streetAddressController.text.trim().toLowerCase(),
+            city: _cityController.text.trim().toLowerCase(),
+            state: _stateController.text.trim().toLowerCase()),
       ),
     );
   }

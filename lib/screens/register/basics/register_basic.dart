@@ -239,8 +239,8 @@ class _RegisterBasicState extends State<RegisterBasic> {
             userRepository: widget._userRepository,
             firstName: widget.firstName,
             lastName: widget.lastName,
-            dateOfBirth: _dateofBirthController.text,
-            gender: _genderController.text),
+            dateOfBirth: _dateofBirthController.text.trim(),
+            gender: _genderController.text.trim().toLowerCase()),
       ),
     );
   }
