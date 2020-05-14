@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
+import 'package:payment_app/utils/appTheme.dart';
 
 class HomeScreen extends StatefulWidget {
   final uid;
@@ -16,10 +16,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = Color(0xfff7892b);
+    Color primaryColor = AppTheme.getTheme().primaryColor;
 
     return Scaffold(
-      backgroundColor: Color(0xfffbb448),
+      backgroundColor: AppTheme.getTheme().primaryColorLight,
       body: StreamBuilder<DocumentSnapshot>(
         stream: Firestore.instance
             .collection('users')

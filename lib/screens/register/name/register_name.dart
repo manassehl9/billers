@@ -170,9 +170,10 @@ class _RegisterNameState extends State<RegisterName> {
       context,
       MaterialPageRoute(
         builder: (context) => RegisterBasicScreen(
-            userRepository: widget._userRepository,
-            firstName: _firstNameController.text.trim().toLowerCase(),
-            lastName: _lastNameController.text.trim().toLowerCase()),
+          userRepository: widget._userRepository,
+          firstName: _firstNameController.text.trim(),
+          lastName: _lastNameController.text.trim(),
+        ),
       ),
     );
   }
