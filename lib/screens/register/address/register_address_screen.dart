@@ -24,17 +24,19 @@ class RegisterAddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register Address')),
+      appBar: AppBar(
+        title: Text('Register Address'),
+      ),
+      backgroundColor: Colors.white,
       body: Center(
         child: BlocProvider<RegisterAddressBloc>(
           create: (context) => RegisterAddressBloc(),
           child: RegisterAddress(
-            userRepository: _userRepository,
-            firstName: firstName,
-            lastName: lastName,
-            dateOfBirth: dateOfBirth,
-            gender: gender
-          ),
+              userRepository: _userRepository,
+              firstName: firstName,
+              lastName: lastName,
+              dateOfBirth: dateOfBirth,
+              gender: gender),
         ),
       ),
     );

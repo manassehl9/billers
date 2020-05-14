@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/address/register_address_screen.dart';
 import 'package:payment_app/screens/register/basics/bloc/bloc.dart';
 import 'package:payment_app/resources/user_repository.dart';
+import 'package:payment_app/utils/appTheme.dart';
 import 'package:payment_app/widgets/button.dart';
 
 class RegisterBasic extends StatefulWidget {
@@ -63,7 +64,7 @@ class _RegisterBasicState extends State<RegisterBasic> {
       child: BlocBuilder<RegisterBasicBloc, RegisterBasicState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Form(
               child: ListView(
                 children: <Widget>[
@@ -72,9 +73,16 @@ class _RegisterBasicState extends State<RegisterBasic> {
                     height: MediaQuery.of(context).size.height / 3,
                     fit: BoxFit.fitHeight,
                   ),
-                  Text('The Basics',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'The Basics',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: AppTheme.getTheme().colorScheme.primary),
+                  ),
                   SizedBox(
                     height: 30,
                   ),
@@ -87,7 +95,10 @@ class _RegisterBasicState extends State<RegisterBasic> {
                   ),
                   Text(
                     'Date Of Birth',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,
@@ -99,8 +110,11 @@ class _RegisterBasicState extends State<RegisterBasic> {
                           minTime: DateTime(1959, 3, 5),
                           maxTime: DateTime(2023, 6, 7),
                           theme: DatePickerTheme(
-                              headerColor: Colors.orange,
-                              backgroundColor: Colors.blue,
+                              headerColor:
+                                  AppTheme.getTheme().colorScheme.primary,
+                              backgroundColor: AppTheme.getTheme()
+                                  .colorScheme
+                                  .primaryVariant,
                               itemStyle: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -146,7 +160,10 @@ class _RegisterBasicState extends State<RegisterBasic> {
                   ),
                   Text(
                     'Gender',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,

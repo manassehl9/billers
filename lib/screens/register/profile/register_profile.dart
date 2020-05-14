@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
 import 'package:payment_app/screens/register/profile/bloc/bloc.dart';
 import 'package:payment_app/screens/register/profile/register_profile_button.dart';
 import 'package:payment_app/resources/user_repository.dart';
+import 'package:payment_app/utils/appTheme.dart';
+import 'package:payment_app/widgets/button.dart';
 
 class RegisterProfile extends StatefulWidget {
   final UserRepository _userRepository;
@@ -106,9 +109,43 @@ class _RegisterProfileState extends State<RegisterProfile> {
                     height: MediaQuery.of(context).size.height / 3,
                     fit: BoxFit.fitHeight,
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                        text: 'Dev',
+                        style: GoogleFonts.portLligatSans(
+                          textStyle: Theme.of(context).textTheme.bodyText1,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.getTheme().primaryColor,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: 'Man',
+                            style: TextStyle(
+                                color: AppTheme.getTheme().accentColor,
+                                fontSize: 30),
+                          ),
+                          TextSpan(
+                            text: 'ny',
+                            style: TextStyle(
+                                color: AppTheme.getTheme().primaryColor,
+                                fontSize: 30),
+                          ),
+                        ]),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Text(
                     'Email',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,
@@ -131,7 +168,10 @@ class _RegisterProfileState extends State<RegisterProfile> {
                   ),
                   Text(
                     'Password',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,
@@ -152,10 +192,11 @@ class _RegisterProfileState extends State<RegisterProfile> {
                   SizedBox(
                     height: 20,
                   ),
-                  RegisterProfileButton(
+                  Button(
                     onPressed: isRegisterButtonEnabled(state)
                         ? _onFormSubmitted
                         : null,
+                    buttonName: 'Submit',
                   ),
                 ],
               ),

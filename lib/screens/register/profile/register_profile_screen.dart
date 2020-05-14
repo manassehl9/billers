@@ -33,7 +33,7 @@ class RegisterProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register')),
+      appBar: AppBar(title: Text('Register'),),
       body: Center(
         child: BlocProvider<RegisterProfileBloc>(
           create: (context) => RegisterProfileBloc(

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/resources/user_repository.dart';
 import 'package:payment_app/screens/register/address/bloc/bloc.dart';
 import 'package:payment_app/screens/register/pin/register_pin_screen.dart';
+import 'package:payment_app/utils/appTheme.dart';
 import 'package:payment_app/widgets/button.dart';
 
 class RegisterAddress extends StatefulWidget {
@@ -60,7 +61,7 @@ class _RegisterAddressState extends State<RegisterAddress> {
       child: BlocBuilder<RegisterAddressBloc, RegisterAddressState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Form(
               child: ListView(
                 children: <Widget>[
@@ -69,9 +70,16 @@ class _RegisterAddressState extends State<RegisterAddress> {
                     height: MediaQuery.of(context).size.height / 3,
                     fit: BoxFit.fitHeight,
                   ),
-                  Text('Where do you live?',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Where do you live?',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: AppTheme.getTheme().colorScheme.primary),
+                  ),
                   SizedBox(
                     height: 30,
                   ),
@@ -84,7 +92,10 @@ class _RegisterAddressState extends State<RegisterAddress> {
                   ),
                   Text(
                     'Address',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,
@@ -109,7 +120,10 @@ class _RegisterAddressState extends State<RegisterAddress> {
                   ),
                   Text(
                     'City',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,
@@ -132,7 +146,10 @@ class _RegisterAddressState extends State<RegisterAddress> {
                   ),
                   Text(
                     'State',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: AppTheme.getTheme().colorScheme.primary),
                   ),
                   SizedBox(
                     height: 10,

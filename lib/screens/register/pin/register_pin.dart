@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/screens/register/confirm_pin/confirm_pin.dart';
 import 'package:payment_app/screens/register/pin/pin.dart';
 import 'package:payment_app/resources/user_repository.dart';
+import 'package:payment_app/utils/appTheme.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class RegisterPin extends StatefulWidget {
@@ -100,8 +101,10 @@ class _RegisterPinState extends State<RegisterPin> {
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
                       'Secure your account',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          color: AppTheme.getTheme().colorScheme.primary),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -113,7 +116,7 @@ class _RegisterPinState extends State<RegisterPin> {
                           text: "Enter your ",
                           children: [
                             TextSpan(
-                                text: 'PIN CODE',
+                                text: 'pin code',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -136,6 +139,11 @@ class _RegisterPinState extends State<RegisterPin> {
                         obsecureText: false,
                         animationType: AnimationType.fade,
                         pinTheme: PinTheme(
+                          inactiveColor:
+                              AppTheme.getTheme().colorScheme.primary,
+                          inactiveFillColor:
+                              AppTheme.getTheme().colorScheme.primary,
+                          activeColor: AppTheme.getTheme().colorScheme.primary,
                           shape: PinCodeFieldShape.box,
                           borderRadius: BorderRadius.circular(5),
                           fieldHeight: 50,
@@ -143,7 +151,7 @@ class _RegisterPinState extends State<RegisterPin> {
                           activeFillColor: Colors.white,
                         ),
                         animationDuration: Duration(milliseconds: 300),
-                        backgroundColor: Colors.blue.shade50,
+                        // backgroundColor: Colors.blue.shade50,
                         enableActiveFill: true,
                         errorAnimationController: pinErrorController,
                         controller: _pinController,
@@ -190,6 +198,7 @@ class _RegisterPinState extends State<RegisterPin> {
                     child: ButtonTheme(
                       height: 50,
                       child: FlatButton(
+                        color: AppTheme.getTheme().colorScheme.primary,
                         onPressed: () {
                           // conditions for validating
                           if (currentText.length != 6) {

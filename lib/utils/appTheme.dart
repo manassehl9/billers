@@ -43,7 +43,7 @@ class AppTheme {
     return base.copyWith(
       colorScheme: designScheme,
       primaryColor: primaryColor,
-      primaryColorDark: Colors.black,
+      primaryColorDark: Colors.black.withOpacity(0.4),
       disabledColor: Colors.black,
       buttonColor: primaryColor,
       secondaryHeaderColor: Colors.black,

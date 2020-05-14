@@ -31,7 +31,10 @@ class RegisterConfirmPinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Confirm Pin')),
+      appBar: AppBar(
+        title: Text('Confirm Pin'),
+      ),
+      backgroundColor: Colors.white,
       body: Center(
         child: BlocProvider<RegisterConfirmPinBloc>(
           create: (context) => RegisterConfirmPinBloc(),

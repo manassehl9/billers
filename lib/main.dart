@@ -48,6 +48,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.getTheme(),
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        
         builder: (context, state) {
           if (state is Unauthenticated) {
             return LoginScreen(userRepository: _userRepository);

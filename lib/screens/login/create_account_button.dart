@@ -24,7 +24,7 @@ class CreateAccountButton extends StatelessWidget {
             style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: AppTheme.getTheme().primaryColor),
+                color: AppTheme.getTheme().primaryColorDark),
           ),
           SizedBox(
             width: 10,

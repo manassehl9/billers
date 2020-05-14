@@ -29,7 +29,10 @@ class RegisterPinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Enter Pin')),
+      appBar: AppBar(
+        title: Text('Enter Pin'),
+      ),
+      backgroundColor: Colors.white,
       body: Center(
         child: BlocProvider<RegisterPinBloc>(
           create: (context) => RegisterPinBloc(),
@@ -41,8 +44,7 @@ class RegisterPinScreen extends StatelessWidget {
               gender: gender,
               streetAddress: streetAddress,
               city: city,
-              state: state
-              ),
+              state: state),
         ),
       ),
     );

@@ -15,6 +15,7 @@ class RegisterNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Register')),
+      backgroundColor: Colors.white,
       body: Center(
         child: BlocProvider<RegisterNameBloc>(
           create: (context) => RegisterNameBloc(),

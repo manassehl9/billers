@@ -45,7 +45,7 @@ class _RegisterNameState extends State<RegisterName> {
       child: BlocBuilder<RegisterNameBloc, RegisterNameState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Form(
               child: ListView(
                 children: <Widget>[
@@ -54,11 +54,16 @@ class _RegisterNameState extends State<RegisterName> {
                     height: MediaQuery.of(context).size.height / 3,
                     fit: BoxFit.fitHeight,
                   ),
-                  Text('Tell Us Your Name',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: AppTheme.getTheme().colorScheme.primary)),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Tell Us Your Name',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: AppTheme.getTheme().colorScheme.primary),
+                  ),
                   SizedBox(
                     height: 30,
                   ),
