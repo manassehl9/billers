@@ -305,11 +305,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.blueAccent,
                                         onPressed: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SettingsScreen(),
-                                              ));
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SettingsScreen(),
+                                            ),
+                                          );
                                         },
                                       ),
                                     )

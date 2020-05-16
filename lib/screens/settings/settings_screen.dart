@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payment_app/screens/settings/personal_info/personal_info_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -63,28 +64,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Column(
                   children: <Widget>[
                     // Edit Profile
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.person,
-                              size: 26.0,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text('Personal Info')
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 16.0,
-                          color: Colors.grey,
-                        ),
-                      ],
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PersonalInfoScreen(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.person,
+                                size: 26.0,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text('Personal Info')
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16.0,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
                     ),
                     // Edit Profile End
                     SizedBox(
