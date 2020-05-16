@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
+import 'package:payment_app/screens/settings/settings_screen.dart';
 import 'package:payment_app/utils/appTheme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -302,7 +303,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: IconButton(
                                         icon: Icon(Icons.settings),
                                         color: Colors.blueAccent,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SettingsScreen(),
+                                              ));
+                                        },
                                       ),
                                     )
                                   ],
