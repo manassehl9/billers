@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 SizedBox(height: 10.0),
                                 Text(
-                                  "${snapshot.data['first_name']} ${snapshot.data['last_name']}",
+                                  "${snapshot.data['last_name']} ${snapshot.data['first_name']} ",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 18.0),
                                 )
