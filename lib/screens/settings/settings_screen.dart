@@ -39,7 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               Center(
                 child: Text(
-                  'Liassidji Manasseh',
+                  'Abiodun Manasseh',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                 ),
               ),

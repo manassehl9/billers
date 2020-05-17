@@ -2,7 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment_app/authentication_bloc/authentication_bloc.dart';
+import 'package:payment_app/screens/home/airtime/airtime_screen.dart';
+import 'package:payment_app/screens/home/internet/internet_screen.dart';
+import 'package:payment_app/screens/home/send_money/send_money_screen.dart';
+import 'package:payment_app/screens/home/tv/tv_screen.dart';
 import 'package:payment_app/screens/settings/settings_screen.dart';
+import 'package:payment_app/screens/transactions/transactions_screen.dart';
 import 'package:payment_app/utils/appTheme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Color primaryColor = AppTheme.getTheme().primaryColor;
 
     return Scaffold(
-      backgroundColor: AppTheme.getTheme().primaryColorLight,
+      // backgroundColor: AppTheme.getTheme().primaryColorLight,
       body: StreamBuilder<DocumentSnapshot>(
         stream: Firestore.instance
             .collection('users')
@@ -103,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: 10.0, horizontal: 30.0),
                                 child: Text(
-                                  'TOP UP',
+                                  'Transactions',
                                   style: TextStyle(
                                       fontSize: 16.0, color: Colors.white),
                                 ),
@@ -148,7 +153,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             icon: Icon(Icons.send),
                                             color: Colors.purple,
                                             iconSize: 30.0,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SendMoneyScreen(),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                         SizedBox(height: 8.0),
@@ -169,11 +182,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                             icon: Icon(Icons.credit_card),
                                             color: Colors.blue,
                                             iconSize: 30.0,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AirtimeScreen(),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                         SizedBox(height: 8.0),
-                                        Text('Pay',
+                                        Text('Airtime',
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.bold))
@@ -187,14 +208,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: Colors.orange.withOpacity(0.1),
                                           child: IconButton(
                                             padding: EdgeInsets.all(15.0),
-                                            icon: Icon(Icons.receipt),
+                                            icon: Icon(Icons
+                                                .signal_cellular_connected_no_internet_4_bar),
                                             color: Colors.orange,
                                             iconSize: 30.0,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      InternetScreen(),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                         SizedBox(height: 8.0),
-                                        Text('Request',
+                                        Text('Internet',
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.bold))
@@ -217,14 +247,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: Colors.pink.withOpacity(0.1),
                                           child: IconButton(
                                             padding: EdgeInsets.all(15.0),
-                                            icon: Icon(Icons.monetization_on),
+                                            icon: Icon(Icons.tv),
                                             color: Colors.pink,
                                             iconSize: 30.0,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TvScreen(),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                         SizedBox(height: 8.0),
-                                        Text('Invoice',
+                                        Text('TV',
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.bold))
@@ -239,14 +277,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .withOpacity(0.1),
                                           child: IconButton(
                                             padding: EdgeInsets.all(15.0),
-                                            icon: Icon(Icons.favorite),
+                                            icon: Icon(Icons.lightbulb_outline),
                                             color: Colors.purpleAccent,
                                             iconSize: 30.0,
                                             onPressed: () {},
                                           ),
                                         ),
                                         SizedBox(height: 8.0),
-                                        Text('Charity',
+                                        Text('Light',
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontWeight: FontWeight.bold))
@@ -323,47 +361,71 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
-                  //   child: Text(
-                  //     'Upcoming',
-                  //     style: TextStyle(
-                  //         color: Colors.black.withOpacity(0.7),
-                  //         fontWeight: FontWeight.bold,
-                  //         fontSize: 20.0),
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: EdgeInsets.only(left: 35.0, bottom: 25.0),
-                  //   child: Container(
-                  //     height: 150.0,
-                  //     child: ListView(
-                  //       scrollDirection: Axis.horizontal,
-                  //       children: <Widget>[
-                  //         UpcomingCard(
-                  //           title: 'Cred Card One',
-                  //           value: 280.0,
-                  //           color: Colors.purple,
-                  //         ),
-                  //         UpcomingCard(
-                  //           title: 'Cred Card Text Two',
-                  //           value: 260.0,
-                  //           color: Colors.blue,
-                  //         ),
-                  //         UpcomingCard(
-                  //           title: 'Cred Card Text Two',
-                  //           value: 210.0,
-                  //           color: Colors.orange,
-                  //         ),
-                  //         UpcomingCard(
-                  //           title: 'Cred Card Text Two',
-                  //           value: 110.0,
-                  //           color: Colors.pink,
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // )
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'Transactions',
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.7),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TransactionsScreen(),
+                              ),
+                            );
+                          },
+                          child: Text('View All',
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.7),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.0)),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 35.0),
+                    child: Container(
+                      height: 200.0,
+                      child: ListView(
+                        // scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          UpcomingCard(
+                            title: 'MTN recharge',
+                            value: 280.0,
+                            color: Colors.purple,
+                          ),
+                          Divider(),
+                          UpcomingCard(
+                            title: 'Transfer',
+                            value: 260.0,
+                            color: Colors.blue,
+                          ),
+                          Divider(),
+                          UpcomingCard(
+                            title: 'DSTV subscription',
+                            value: 210.0,
+                            color: Colors.orange,
+                          ),
+                          Divider(),
+                          UpcomingCard(
+                            title: 'Cred Card Text Two',
+                            value: 110.0,
+                            color: Colors.pink,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             );
@@ -405,21 +467,33 @@ class UpcomingCard extends StatelessWidget {
       child: Container(
         width: 120.0,
         decoration: BoxDecoration(
-            color: color,
+            //  color: color,
             borderRadius: BorderRadius.all(Radius.circular(25.0))),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(title,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(title,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0)),
+                  Text('# $value',
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold))
+                ],
+              ),
+              SizedBox(height: 10.0),
+              Text('12 Nov 2019, 10:15',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-              SizedBox(height: 30.0),
-              Text('$value',
-                  style: TextStyle(
-                      fontSize: 22.0,
-                      color: Colors.white,
+                      fontSize: 15.0,
+                      color: Colors.grey,
                       fontWeight: FontWeight.bold))
             ],
           ),
